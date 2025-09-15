@@ -1,16 +1,20 @@
-﻿using global::Marketplace.Controllers;
-using global::Marketplace.ServiceModels;
+﻿using AutoMapper;
+using global::Marketplace.Controllers;
 using global::Marketplace.Services;
+using Marketplace.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
 namespace Marketplace.Tests
-{                       
+{
     // Classe de tests unitaires pour le contrôleur ProductController
     public class ProductControllerTests
     {
         // Mock du service utilisé par le contrôleur
         private readonly Mock<IProductService> _serviceMock;
+
+        private readonly Mock<IMapper> _mapperMock;
+
         // Instance du contrôleur à tester
         private readonly ProductController _controller;
 
@@ -18,7 +22,9 @@ namespace Marketplace.Tests
         public ProductControllerTests()
         {
             _serviceMock = new Mock<IProductService>();
-            _controller = new ProductController(_serviceMock.Object);
+            _mapperMock = new Mock<IMapper>();
+            _controller = new ProductController(_serviceMock.Object, _mapperMock.Object);
+
         }
 
         // Test : Vérifie que GetAll retourne un OkObjectResult avec une liste de produits

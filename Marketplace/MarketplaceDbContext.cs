@@ -1,19 +1,23 @@
 ﻿using Marketplace.DataModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-
 namespace Marketplace
 {
-    public class MarketplaceDbContext : DbContext
+    public class MarketplaceDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
-        public MarketplaceDbContext(DbContextOptions<MarketplaceDbContext> options) : base(options) { }
+        public MarketplaceDbContext(DbContextOptions<MarketplaceDbContext> options) : base(options)
+        {
+        }
 
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<ProductImage> ProductImages => Set<ProductImage>();
         public DbSet<User> User => Set<User>();
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<Product> Products => Set<Product>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -162,6 +166,7 @@ namespace Marketplace
                 }
             );
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.ConfigureWarnings(warnings =>

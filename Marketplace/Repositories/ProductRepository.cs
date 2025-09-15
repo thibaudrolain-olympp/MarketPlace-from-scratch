@@ -1,5 +1,4 @@
 ﻿using Marketplace.DataModels;
-using Microsoft.EntityFrameworkCore;
 
 namespace Marketplace.Repositories
 {
@@ -16,4 +15,3 @@ namespace Marketplace.Repositories
         public ProductRepository(MarketplaceDbContext db) : base(db) { }
     }
 }
-    

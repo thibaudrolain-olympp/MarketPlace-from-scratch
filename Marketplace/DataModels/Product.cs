@@ -27,7 +27,5 @@ namespace Marketplace.DataModels
         public DateTime UpdatedAt { get; set; }
 
         public ICollection<ProductImage> Images { get; set; }
-
     }
-
 }

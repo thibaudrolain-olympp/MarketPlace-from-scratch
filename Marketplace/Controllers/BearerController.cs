@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Marketplace.Controllers
 {
@@ -8,9 +7,9 @@ namespace Marketplace.Controllers
     public class BearerController(IConfiguration configuration) : ControllerBase
     {
         [HttpPost(Name = "GetToken")]
-        public ActionResult GetToken([FromBody]string key)
+        public ActionResult GetToken([FromBody] string key)
         {
-            if (string.IsNullOrEmpty(key) || key != configuration.GetSection("JwtSettings")["Key"] )
+            if (string.IsNullOrEmpty(key) || key != configuration.GetSection("JwtSettings")["Key"])
             {
                 return new UnauthorizedResult();
             }
@@ -21,8 +20,8 @@ namespace Marketplace.Controllers
             var credentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(cle, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256);
 
             var token = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(
-/*                issuer: configuration.GetSection("JwtSettings")["Issuer"],
-                audience: configuration.GetSection("JwtSettings")["Audience"],*/
+                /*                issuer: configuration.GetSection("JwtSettings")["Issuer"],
+                                audience: configuration.GetSection("JwtSettings")["Audience"],*/
                 signingCredentials: credentials,
                 expires: DateTime.UtcNow.AddMinutes(30)
             );

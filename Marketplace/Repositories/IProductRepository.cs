@@ -2,7 +2,7 @@
 
 namespace Marketplace.Repositories
 {
-    public interface IProductRepository: IGenericRepository<Product>
+    public interface IProductRepository : IGenericRepository<Product>
     {
         //Spécifique au produit
     }

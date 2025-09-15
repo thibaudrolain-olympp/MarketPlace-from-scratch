@@ -1,6 +1,7 @@
-﻿using Marketplace.DataModels;
+﻿using AutoMapper;
+using Marketplace.DataModels;
+using Marketplace.Dto;
 using Marketplace.ServiceModels;
-using AutoMapper;
 
 namespace Marketplace.Automapper
 {
@@ -8,7 +9,8 @@ namespace Marketplace.Automapper
     {
         public ProductProfile()
         {
-            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<ProductServiceModel, ProductDto>().ReverseMap();
+            CreateMap<Product, ProductServiceModel>().ReverseMap();
         }
     }
 }

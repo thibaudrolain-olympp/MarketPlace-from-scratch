@@ -11,5 +11,4 @@
 
         public bool IsMain { get; set; }
     }
-
 }

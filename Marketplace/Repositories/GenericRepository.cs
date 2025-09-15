@@ -14,7 +14,7 @@ namespace Marketplace.Repositories
             _dbSet = db.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
+        public async Task<IList<T>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
 
         public async Task<T?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
@@ -41,5 +41,4 @@ namespace Marketplace.Repositories
             return true;
         }
     }
-
 }

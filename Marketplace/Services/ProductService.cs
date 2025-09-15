@@ -1,14 +1,14 @@
-﻿using Marketplace.DataModels;
+﻿using AutoMapper;
+using Marketplace.DataModels;
 using Marketplace.Repositories;
 using Marketplace.ServiceModels;
-using AutoMapper;
 
 namespace Marketplace.Services
 {
     /// <summary>
     /// Service métier pour la gestion des produits.
     /// </summary>
-    /// 
+    ///
     /// <inheritdoc/>
     public class ProductService : IProductService
     {
@@ -26,31 +26,31 @@ namespace Marketplace.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllAsync()
+        public async Task<IList<ProductServiceModel>> GetAllAsync()
         {
             var entities = await _repository.GetAllAsync();
-            return _mapper.Map<IEnumerable<ProductDto>>(entities);
+            return _mapper.Map<IList<ProductServiceModel>>(entities);
         }
 
-        public async Task<ProductDto?> GetByIdAsync(int id)
+        public async Task<ProductServiceModel?> GetByIdAsync(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            return entity is null ? null : _mapper.Map<ProductDto>(entity);
+            return entity is null ? null : _mapper.Map<ProductServiceModel>(entity);
         }
 
-        public async Task<ProductDto> CreateAsync(ProductDto dto)
+        public async Task<ProductServiceModel> CreateAsync(ProductServiceModel dto)
         {
             var entity = _mapper.Map<Product>(dto);
             var created = await _repository.AddAsync(entity);
-            return _mapper.Map<ProductDto>(created);
+            return _mapper.Map<ProductServiceModel>(created);
         }
 
-        public async Task<ProductDto?> UpdateAsync(int id, ProductDto dto)
+        public async Task<ProductServiceModel?> UpdateAsync(int id, ProductServiceModel dto)
         {
             var entity = _mapper.Map<Product>(dto);
             entity.Id = id;
             var updated = await _repository.UpdateAsync(entity);
-            return updated is null ? null : _mapper.Map<ProductDto>(updated);
+            return updated is null ? null : _mapper.Map<ProductServiceModel>(updated);
         }
 
         public async Task<bool> DeleteAsync(int id) => await _repository.DeleteAsync(id);

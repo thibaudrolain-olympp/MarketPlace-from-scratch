@@ -10,7 +10,7 @@
         /// Récupère toutes les entités de type T.
         /// </summary>
         /// <returns>Liste des entités</returns>
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IList<T>> GetAllAsync();
 
         /// <summary>
         /// Récupère une entité par son identifiant.

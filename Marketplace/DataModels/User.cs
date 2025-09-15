@@ -23,5 +23,4 @@ namespace Marketplace.DataModels
 
         public ICollection<Order> Orders { get; set; }
     }
-
 }

@@ -1,5 +1,4 @@
-﻿using Marketplace.DataModels;
-using Marketplace.ServiceModels;
+﻿using Marketplace.ServiceModels;
 
 namespace Marketplace.Services
 {
@@ -12,30 +11,30 @@ namespace Marketplace.Services
         /// <summary>
         /// Récupère la liste de tous les produits.
         /// </summary>
-        /// <returns>Liste des produits sous forme de ProductDto</returns>
-        Task<IEnumerable<ProductDto>> GetAllAsync();
+        /// <returns>Liste des produits sous forme de ProductServiceModel</returns>
+        Task<IList<ProductServiceModel>> GetAllAsync();
 
         /// <summary>
         /// Récupère un produit par son identifiant.
         /// </summary>
         /// <param name="id">Identifiant du produit</param>
-        /// <returns>ProductDto correspondant ou null si non trouvé</returns>
-        Task<ProductDto?> GetByIdAsync(int id);
+        /// <returns>ProductServiceModel correspondant ou null si non trouvé</returns>
+        Task<ProductServiceModel?> GetByIdAsync(int id);
 
         /// <summary>
         /// Crée un nouveau produit.
         /// </summary>
         /// <param name="product">Données du produit à créer</param>
-        /// <returns>ProductDto du produit créé</returns>
-        Task<ProductDto> CreateAsync(ProductDto product);
+        /// <returns>ProductServiceModel du produit créé</returns>
+        Task<ProductServiceModel> CreateAsync(ProductServiceModel product);
 
         /// <summary>
         /// Met à jour un produit existant.
         /// </summary>
         /// <param name="id">Identifiant du produit à mettre à jour</param>
         /// <param name="updated">Nouvelles données du produit</param>
-        /// <returns>ProductDto mis à jour ou null si non trouvé</returns>
-        Task<ProductDto?> UpdateAsync(int id, ProductDto updated);
+        /// <returns>ProductServiceModel mis à jour ou null si non trouvé</returns>
+        Task<ProductServiceModel?> UpdateAsync(int id, ProductServiceModel updated);
 
         /// <summary>
         /// Supprime un produit par son identifiant.

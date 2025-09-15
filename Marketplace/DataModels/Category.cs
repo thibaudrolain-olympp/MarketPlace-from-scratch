@@ -9,5 +9,4 @@
         public int? ParentId { get; set; }
         public ICollection<Product> Products { get; set; }
     }
-
 }

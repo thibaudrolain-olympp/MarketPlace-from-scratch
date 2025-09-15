@@ -4,6 +4,7 @@ using Marketplace;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Marketplace.Migrations
 {
     [DbContext(typeof(MarketplaceDbContext))]
-    partial class MarketplaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250903143159_AddIdentityRoles")]
+    partial class AddIdentityRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,131 +167,131 @@ namespace Marketplace.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2247),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 427, DateTimeKind.Utc).AddTicks(9440),
                             Description = "Chaussures trail pour terrains techniques et boueux.",
                             Name = "Chaussures de Trail Salomon Speedcross 5",
                             Price = 129.90m,
                             Quantity = 50,
                             SellerProfileId = 1,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2585)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 427, DateTimeKind.Utc).AddTicks(9748)
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2952),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(37),
                             Description = "Chaussures rapides pour triathlons et transitions rapides.",
                             Name = "Chaussures de Triathlon Asics Noosa Tri 15",
                             Price = 139.00m,
                             Quantity = 40,
                             SellerProfileId = 1,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2953)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(38)
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2955),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(40),
                             Description = "Sac léger pour trail avec réservoir 1.5L.",
                             Name = "Sac d’hydratation Camelbak Ultra Pro Vest 7L",
                             Price = 119.99m,
                             Quantity = 25,
                             SellerProfileId = 2,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2956)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(40)
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2958),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(42),
                             Description = "Ceinture légère et élastique pour dossard et gels.",
                             Name = "Ceinture porte-dossard triathlon Compressport",
                             Price = 19.90m,
                             Quantity = 100,
                             SellerProfileId = 3,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2958)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(43)
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2960),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(45),
                             Description = "Néoprène pour natation en eau libre.",
                             Name = "Combinaison néoprène Orca Athlex Flow",
                             Price = 289.00m,
                             Quantity = 15,
                             SellerProfileId = 2,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2961)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(45)
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 5,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2963),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(47),
                             Description = "Vélo performance route pour triathlons et compétitions.",
                             Name = "Vélo de route carbone Canyon Aeroad CF SLX",
                             Price = 3999.00m,
                             Quantity = 5,
                             SellerProfileId = 4,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2963)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(48)
                         },
                         new
                         {
                             Id = 7,
                             CategoryId = 6,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2965),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(50),
                             Description = "Montre GPS multisport avec suivi performance trail/triathlon.",
                             Name = "Montre GPS Garmin Forerunner 965",
                             Price = 599.00m,
                             Quantity = 20,
                             SellerProfileId = 1,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2966)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(50)
                         },
                         new
                         {
                             Id = 8,
                             CategoryId = 7,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2968),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(52),
                             Description = "Bâtons pliables ultralégers pour longues distances.",
                             Name = "Bâtons de trail Black Diamond Distance Carbon Z",
                             Price = 159.00m,
                             Quantity = 30,
                             SellerProfileId = 3,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2969)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(53)
                         },
                         new
                         {
                             Id = 9,
                             CategoryId = 8,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3053),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(55),
                             Description = "Pack de gels énergétiques pour endurance.",
                             Name = "Pack gels énergétiques GU Energy (24x40g)",
                             Price = 38.00m,
                             Quantity = 200,
                             SellerProfileId = 2,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3053)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(55)
                         },
                         new
                         {
                             Id = 10,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3056),
+                            CreatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(57),
                             Description = "Frontale haute performance pour trail nocturne.",
                             Name = "Lampe frontale Petzl Nao RL 1500 lumens",
                             Price = 159.90m,
                             Quantity = 25,
                             SellerProfileId = 1,
                             Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3057)
+                            UpdatedAt = new DateTime(2025, 9, 3, 14, 31, 58, 428, DateTimeKind.Utc).AddTicks(57)
                         });
                 });
 
