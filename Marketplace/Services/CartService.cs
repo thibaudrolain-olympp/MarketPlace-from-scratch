@@ -7,7 +7,6 @@ namespace Marketplace.Services
 {
     public class CartService(MarketplaceDbContext _context, IMapper _mapper) : ICartService
     {
-
         public async Task<CartServiceModel> GetCartAsync(string userId, CancellationToken cancellationToken)
         {
             var cartEntity = await _context.Carts

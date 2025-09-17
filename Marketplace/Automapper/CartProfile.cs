@@ -1,6 +1,6 @@
-﻿using Marketplace.Dto;
-using AutoMapper;
+﻿using AutoMapper;
 using Marketplace.DataModels;
+using Marketplace.Dto;
 using Marketplace.ServiceModels;
 
 namespace Marketplace.Automapper

@@ -20,5 +20,4 @@ namespace Marketplace.Services
 
         Task ClearCartAsync(string userId, CancellationToken cancellationToken = default);
     }
-
 }

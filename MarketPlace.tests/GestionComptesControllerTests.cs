@@ -23,6 +23,7 @@ namespace Marketplace.Tests.Controllers
     {
         // Mocks des dépendances du contrôleur
         private readonly Mock<UserManager<IdentityUser>> _userManagerMock;
+
         private readonly Mock<SignInManager<IdentityUser>> _signInManagerMock;
         private readonly Mock<RoleManager<IdentityRole>> _roleManagerMock;
         private readonly Mock<IConfiguration> _configMock;
@@ -72,7 +73,6 @@ namespace Marketplace.Tests.Controllers
             _controller.ControllerContext.HttpContext.Request.Scheme = "http";
             _controller.ControllerContext.HttpContext.Request.Host = new HostString("localhost");
         }
-
 
         // ------------------- REGISTER -------------------
         /// <summary>

@@ -24,15 +24,15 @@ namespace Marketplace.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDto request)
         {
-              // Vérifier si l'email existe déjà
-    var existingUser = await _userManager.FindByEmailAsync(request.Email);
-    if (existingUser != null)
-        return BadRequest("This email is already registered.");
+            // Vérifier si l'email existe déjà
+            var existingUser = await _userManager.FindByEmailAsync(request.Email);
+            if (existingUser != null)
+                return BadRequest("This email is already registered.");
 
-    // Vérifier si le nom d'utilisateur existe déjà (optionnel)
-    var existingUsername = await _userManager.FindByNameAsync(request.Username);
-    if (existingUsername != null)
-        return BadRequest("This username is already taken.");
+            // Vérifier si le nom d'utilisateur existe déjà (optionnel)
+            var existingUsername = await _userManager.FindByNameAsync(request.Username);
+            if (existingUsername != null)
+                return BadRequest("This username is already taken.");
             var user = new IdentityUser
             {
                 UserName = request.Username,
@@ -145,7 +145,6 @@ namespace Marketplace.Controllers
         <p>Cliquez sur le bouton ci-dessous pour réinitialiser votre mot de passe :</p>
         <a href='{resetLink}' style='display:inline-block;padding:10px 20px;background-color:#007bff;color:white;text-decoration:none;border-radius:5px;'>Réinitialiser</a>
     ";
-
 
             await _emailSender.SendEmailAsync(user.Email, "Réinitialiser le mot de passe", emailBody);
 

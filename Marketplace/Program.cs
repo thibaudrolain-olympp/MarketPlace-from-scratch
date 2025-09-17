@@ -1,9 +1,5 @@
 using Marketplace;
 using Marketplace.Automapper;
-using Marketplace.Controllers;
-using Marketplace.Repositories;
-using Marketplace.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,7 +22,6 @@ builder.Services.SwaggerDescriptors();
 // Cela permet à l'application d'accepter et de valider les tokens JWT dans les requêtes HTTP.
 builder.Services.AuthenticationDescriptors(builder.Configuration);
 
-
 // Configuration de la redirection HTTPS
 builder.Services.AddHttpsRedirection(options =>
 {
@@ -44,7 +39,6 @@ builder.Services.AddDbContext<MarketplaceDbContext>(
 
 // Injection de la configuration
 builder.Services.Configure<IConfiguration>(builder.Configuration);
-
 
 builder.Services.IdentityDescriptors();
 

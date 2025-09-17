@@ -21,6 +21,9 @@ namespace Marketplace.Controllers
         public async Task<ActionResult<CartDto>> AddItem(string userId, [FromBody] AddCartItemRequestDto request)
         {
             var itemModel = _mapper.Map<CartItemServiceModel>(request);
+            if (itemModel == null)
+                throw new NullReferenceException("Mapping failed: CartItemServiceModel is null.");
+
             var updatedCart = await _cartService.AddItemAsync(userId, itemModel);
             return Ok(_mapper.Map<CartDto>(updatedCart));
         }
@@ -46,5 +49,4 @@ namespace Marketplace.Controllers
             return NoContent();
         }
     }
-
 }

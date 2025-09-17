@@ -68,6 +68,8 @@ namespace Marketplace.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductDto>> Create(ProductDto product)
         {
+            if (product == null)
+                return BadRequest();
             try
             {
                 var created = await _service.CreateAsync(_mapper.Map<ProductServiceModel>(product));
@@ -89,11 +91,13 @@ namespace Marketplace.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<ProductDto>> Update(int id, ProductDto product)
         {
+            if (product == null)
+                return BadRequest();
             try
             {
                 var updated = await _service.UpdateAsync(id, _mapper.Map<ProductServiceModel>(product));
                 if (updated == null) return NotFound();
-                return Ok(updated);
+                return Ok(_mapper.Map<ProductDto>(updated));
             }
             catch (Exception ex)
             {

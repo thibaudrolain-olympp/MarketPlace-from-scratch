@@ -3,13 +3,11 @@ using Marketplace.Repositories;
 using Marketplace.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using System.Runtime.CompilerServices;
 
 namespace Marketplace
 {
     public static class Middleware
     {
-
         public static IServiceCollection ServiceDescriptors(this IServiceCollection services)
         {
             services.AddScoped<BearerController>();
@@ -85,7 +83,6 @@ namespace Marketplace
             }).AddRoles<IdentityRole>().AddEntityFrameworkStores<MarketplaceDbContext>().AddDefaultTokenProviders();
 
             return services;
-
         }
 
         public static IServiceCollection SwaggerDescriptors(this IServiceCollection services)

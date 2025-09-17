@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using global::Marketplace.Controllers;
 using global::Marketplace.Services;
-using Marketplace.DataModels;
 using Marketplace.Dto;
 using Marketplace.ServiceModels;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +13,10 @@ namespace Marketplace.Tests
     {
         // Mock du service utilisé par le contrôleur
         private readonly Mock<IProductService> _serviceMock;
+
         // Mock du mapper utilisé par le contrôleur
         private readonly Mock<IMapper> _mapperMock;
+
         // Instance du contrôleur à tester
         private readonly ProductController _controller;
 
@@ -145,7 +146,7 @@ namespace Marketplace.Tests
         [Fact]
         public async Task Create_ReturnsCreatedAtAction_WithProduct()
         {
-                    // Arrange
+            // Arrange
             var dto = new ProductDto
             {
                 Id = 1,
