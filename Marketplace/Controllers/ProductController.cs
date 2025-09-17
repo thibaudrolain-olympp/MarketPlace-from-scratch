@@ -27,7 +27,18 @@ namespace Marketplace.Controllers
         /// <returns>Liste des produits</returns>
         [HttpGet]
         public async Task<ActionResult<IList<ProductDto>>> GetAll()
-            => Ok(_mapper.Map<IList<ProductDto>>(await _service.GetAllAsync()));
+        {
+            try
+            {
+                var serviceModels = await _service.GetAllAsync();
+                var dtoList = _mapper.Map<IList<ProductDto>>(serviceModels);
+                return Ok(dtoList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur interne du serveur : {ex.Message}");
+            }
+        }
 
         /// <summary>
         /// Récupère un produit par son identifiant.
@@ -37,9 +48,16 @@ namespace Marketplace.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ProductDto>> GetById(int id)
         {
-            var product = await _service.GetByIdAsync(id);
-            if (product == null) return NotFound();
-            return Ok(_mapper.Map<ProductDto>(product));
+            try
+            {
+                var product = await _service.GetByIdAsync(id);
+                if (product == null) return NotFound();
+                return Ok(_mapper.Map<ProductDto>(product));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur interne du serveur : {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -50,8 +68,16 @@ namespace Marketplace.Controllers
         [HttpPost]
         public async Task<ActionResult<ProductDto>> Create(ProductDto product)
         {
-            var created = await _service.CreateAsync(_mapper.Map<ProductServiceModel>(product));
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            try
+            {
+                var created = await _service.CreateAsync(_mapper.Map<ProductServiceModel>(product));
+                var dto = _mapper.Map<ProductDto>(created);
+                return CreatedAtAction(nameof(GetById), new { id = created.Id }, dto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur interne du serveur : {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -63,9 +89,16 @@ namespace Marketplace.Controllers
         [HttpPut("{id:int}")]
         public async Task<ActionResult<ProductDto>> Update(int id, ProductDto product)
         {
-            var updated = await _service.UpdateAsync(id, _mapper.Map<ProductServiceModel>(product));
-            if (updated == null) return NotFound();
-            return Ok(updated);
+            try
+            {
+                var updated = await _service.UpdateAsync(id, _mapper.Map<ProductServiceModel>(product));
+                if (updated == null) return NotFound();
+                return Ok(updated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur interne du serveur : {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -76,9 +109,16 @@ namespace Marketplace.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var deleted = await _service.DeleteAsync(id);
-            if (!deleted) return NotFound();
-            return NoContent();
+            try
+            {
+                var deleted = await _service.DeleteAsync(id);
+                if (!deleted) return NotFound();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur interne du serveur : {ex.Message}");
+            }
         }
     }
 }

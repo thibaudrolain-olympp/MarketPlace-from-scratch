@@ -37,10 +37,9 @@ namespace Marketplace.Controllers
             {
                 UserName = request.Username,
                 Email = request.Email,
-                PhoneNumber = request.PhoneNumber,
-                PasswordHash = request.Password
+                PhoneNumber = request.PhoneNumber
             };
-            var result = await _userManager.CreateAsync(user);
+            var result = await _userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
@@ -116,7 +115,7 @@ namespace Marketplace.Controllers
             if (!result.Succeeded)
                 return Unauthorized();
 
-            return Ok(new
+            return Ok(new LoginResponseDto
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });

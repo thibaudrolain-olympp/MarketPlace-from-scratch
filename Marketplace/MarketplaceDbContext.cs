@@ -12,6 +12,8 @@ namespace Marketplace
         {
         }
 
+        public DbSet<Cart> Carts => Set<Cart>();
+        public DbSet<CartItem> CartItems => Set<CartItem>();
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<ProductImage> ProductImages => Set<ProductImage>();
         public DbSet<User> User => Set<User>();

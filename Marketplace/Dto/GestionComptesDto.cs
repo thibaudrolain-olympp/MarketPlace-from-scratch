@@ -8,6 +8,10 @@
             public string Password { get; set; }
         }
 
+        public class LoginResponseDto
+        {
+            public string token { get; set; }
+        }
         public class RegisterUserDto
         {
             public string Username { get; set; }
