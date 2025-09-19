@@ -50,6 +50,7 @@ builder.Services.ServiceDescriptors();
 
 // Configuration d'AutoMapper avec le profil produit
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<ProductProfile>());
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<CartProfile>());
 
 // Construction de l'application
 var app = builder.Build();

@@ -18,7 +18,6 @@ namespace Marketplace.DataModels
 
         public int Quantity { get; set; }
 
-        public int CategoryId { get; set; }
         public Category Category { get; set; }
 
         public string Status { get; set; } // active, sold_out, inactive

@@ -1,107 +1,70 @@
 ﻿using AutoMapper;
 using Marketplace.DataModels;
 using Marketplace.ServiceModels;
-using System.Data.Entity;
+using Marketplace.Repositories;
 
 namespace Marketplace.Services
 {
-    public class CartService(MarketplaceDbContext _context, IMapper _mapper) : ICartService
+    public class CartService(ICartRepository _cartRepo, IMapper _mapper) : ICartService
     {
-        public async Task<CartServiceModel> GetCartAsync(string userId, CancellationToken cancellationToken)
+        public async Task<CartServiceModel?> GetCartAsync(string userId, CancellationToken cancellationToken)
         {
-            var cartEntity = await _context.Carts
-                .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _cartRepo.GetByUserIdAsync(userId, cancellationToken);
+            if (cart == null)
+                return null;
 
-            if (cartEntity == null)
-            {
-                cartEntity = new Cart { UserId = userId };
-                _context.Carts.Add(cartEntity);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-
-            return _mapper.Map<CartServiceModel>(cartEntity);
+            return _mapper.Map<CartServiceModel>(cart);
         }
 
         public async Task<CartServiceModel> AddItemAsync(string userId, CartItemServiceModel item, CancellationToken cancellationToken = default)
         {
-            var cart = await _context.Carts
-                .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.UserId == userId, cancellationToken);
+            var cart = await _cartRepo.GetByUserIdAsync(userId, cancellationToken)
+                       ?? await _cartRepo.AddAsync(new Cart { UserId = userId }, cancellationToken);
 
-            if (cart == null)
-            {
-                cart = new Cart { UserId = userId };
-                _context.Carts.Add(cart);
-            }
-
-            var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == item.ProductId);
+            var existingItem = cart.Items.FirstOrDefault(i => i.Product.Id == item.ProductId);
             if (existingItem != null)
-            {
                 existingItem.Quantity += item.Quantity;
-            }
             else
-            {
                 cart.Items.Add(_mapper.Map<CartItem>(item));
-            }
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _cartRepo.SaveChangesAsync(cancellationToken);
             return _mapper.Map<CartServiceModel>(cart);
         }
 
-        public async Task RemoveItemAsync(string userId, int productId, CancellationToken cancellationToken = default)
+        public async Task<CartServiceModel?> UpdateItemAsync(string userId, int productId, int quantity, CancellationToken cancellationToken = default)
         {
-            var cart = await _context.Carts
-                .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.UserId == userId, cancellationToken);
+            var cart = await _cartRepo.GetByUserIdAsync(userId, cancellationToken);
+            if (cart == null) return null;
 
-            if (cart == null) return;
-
-            var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
-            if (item != null)
-            {
-                cart.Items.Remove(item);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-        }
-
-        public async Task<CartServiceModel> UpdateItemAsync(string userId, int productId, int quantity, CancellationToken cancellationToken = default)
-        {
-            var cart = await _context.Carts
-                .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.UserId == userId, cancellationToken);
-
-            if (cart == null)
-                return new CartServiceModel { UserId = userId };
-
-            var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
-            if (item == null)
-                return _mapper.Map<CartServiceModel>(cart);
+            var item = cart.Items.FirstOrDefault(i => i.Product.Id == productId);
+            if (item == null) return _mapper.Map<CartServiceModel>(cart);
 
             if (quantity <= 0)
                 cart.Items.Remove(item);
             else
                 item.Quantity = quantity;
 
-            await _context.SaveChangesAsync(cancellationToken);
+            await _cartRepo.SaveChangesAsync(cancellationToken);
+            return _mapper.Map<CartServiceModel>(cart);
+        }
 
-            var updated = await _context.Carts
-                .Include(c => c.Items)
-                .FirstAsync(c => c.Id == cart.Id, cancellationToken);
+        public async Task RemoveItemAsync(string userId, int productId, CancellationToken cancellationToken = default)
+        {
+            var cart = await _cartRepo.GetByUserIdAsync(userId, cancellationToken);
+            if (cart == null) return;
 
-            return _mapper.Map<CartServiceModel>(updated);
+            var item = cart.Items.FirstOrDefault(i => i.Product.Id == productId);
+            if (item != null)
+                await _cartRepo.RemoveItemAsync(item, cancellationToken);
         }
 
         public async Task ClearCartAsync(string userId, CancellationToken cancellationToken = default)
         {
-            var cart = await _context.Carts
-                .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.UserId == userId, cancellationToken);
-
+            var cart = await _cartRepo.GetByUserIdAsync(userId, cancellationToken);
             if (cart == null) return;
 
-            _context.CartItems.RemoveRange(cart.Items);
-            await _context.SaveChangesAsync(cancellationToken);
+            cart.Items.Clear();
+            await _cartRepo.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -14,7 +14,8 @@ namespace Marketplace
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
-
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartRepository, CartRepository>();
             return services;
         }
 

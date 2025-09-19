@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Marketplace.Migrations
 {
     [DbContext(typeof(MarketplaceDbContext))]
-    [Migration("20250903143820_AddIdentityRoles2")]
-    partial class AddIdentityRoles2
+    [Migration("20250917184357_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,55 @@ namespace Marketplace.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Marketplace.DataModels.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("Marketplace.DataModels.CartItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
+                });
 
             modelBuilder.Entity("Marketplace.DataModels.Category", b =>
                 {
@@ -113,8 +162,6 @@ namespace Marketplace.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuyerId");
-
                     b.ToTable("Orders");
                 });
 
@@ -126,7 +173,10 @@ namespace Marketplace.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -161,138 +211,6 @@ namespace Marketplace.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2247),
-                            Description = "Chaussures trail pour terrains techniques et boueux.",
-                            Name = "Chaussures de Trail Salomon Speedcross 5",
-                            Price = 129.90m,
-                            Quantity = 50,
-                            SellerProfileId = 1,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2585)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2952),
-                            Description = "Chaussures rapides pour triathlons et transitions rapides.",
-                            Name = "Chaussures de Triathlon Asics Noosa Tri 15",
-                            Price = 139.00m,
-                            Quantity = 40,
-                            SellerProfileId = 1,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2953)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2955),
-                            Description = "Sac léger pour trail avec réservoir 1.5L.",
-                            Name = "Sac d’hydratation Camelbak Ultra Pro Vest 7L",
-                            Price = 119.99m,
-                            Quantity = 25,
-                            SellerProfileId = 2,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2956)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2958),
-                            Description = "Ceinture légère et élastique pour dossard et gels.",
-                            Name = "Ceinture porte-dossard triathlon Compressport",
-                            Price = 19.90m,
-                            Quantity = 100,
-                            SellerProfileId = 3,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2958)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 4,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2960),
-                            Description = "Néoprène pour natation en eau libre.",
-                            Name = "Combinaison néoprène Orca Athlex Flow",
-                            Price = 289.00m,
-                            Quantity = 15,
-                            SellerProfileId = 2,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2961)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 5,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2963),
-                            Description = "Vélo performance route pour triathlons et compétitions.",
-                            Name = "Vélo de route carbone Canyon Aeroad CF SLX",
-                            Price = 3999.00m,
-                            Quantity = 5,
-                            SellerProfileId = 4,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2963)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 6,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2965),
-                            Description = "Montre GPS multisport avec suivi performance trail/triathlon.",
-                            Name = "Montre GPS Garmin Forerunner 965",
-                            Price = 599.00m,
-                            Quantity = 20,
-                            SellerProfileId = 1,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2966)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 7,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2968),
-                            Description = "Bâtons pliables ultralégers pour longues distances.",
-                            Name = "Bâtons de trail Black Diamond Distance Carbon Z",
-                            Price = 159.00m,
-                            Quantity = 30,
-                            SellerProfileId = 3,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(2969)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CategoryId = 8,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3053),
-                            Description = "Pack de gels énergétiques pour endurance.",
-                            Name = "Pack gels énergétiques GU Energy (24x40g)",
-                            Price = 38.00m,
-                            Quantity = 200,
-                            SellerProfileId = 2,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3053)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3056),
-                            Description = "Frontale haute performance pour trail nocturne.",
-                            Name = "Lampe frontale Petzl Nao RL 1500 lumens",
-                            Price = 159.90m,
-                            Quantity = 25,
-                            SellerProfileId = 1,
-                            Status = "active",
-                            UpdatedAt = new DateTime(2025, 9, 3, 14, 38, 19, 533, DateTimeKind.Utc).AddTicks(3057)
-                        });
                 });
 
             modelBuilder.Entity("Marketplace.DataModels.ProductImage", b =>
@@ -318,42 +236,6 @@ namespace Marketplace.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("Marketplace.DataModels.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -554,26 +436,30 @@ namespace Marketplace.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Marketplace.DataModels.Order", b =>
+            modelBuilder.Entity("Marketplace.DataModels.CartItem", b =>
                 {
-                    b.HasOne("Marketplace.DataModels.User", "Buyer")
-                        .WithMany("Orders")
-                        .HasForeignKey("BuyerId")
+                    b.HasOne("Marketplace.DataModels.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Buyer");
+                    b.HasOne("Marketplace.DataModels.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Marketplace.DataModels.Product", b =>
                 {
-                    b.HasOne("Marketplace.DataModels.Category", "Category")
+                    b.HasOne("Marketplace.DataModels.Category", null)
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Marketplace.DataModels.ProductImage", b =>
@@ -638,6 +524,11 @@ namespace Marketplace.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Marketplace.DataModels.Cart", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("Marketplace.DataModels.Category", b =>
                 {
                     b.Navigation("Products");
@@ -646,11 +537,6 @@ namespace Marketplace.Migrations
             modelBuilder.Entity("Marketplace.DataModels.Product", b =>
                 {
                     b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("Marketplace.DataModels.User", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

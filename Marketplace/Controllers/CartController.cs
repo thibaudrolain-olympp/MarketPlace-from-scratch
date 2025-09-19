@@ -14,6 +14,9 @@ namespace Marketplace.Controllers
         public async Task<ActionResult<CartDto>> GetCart(string userId)
         {
             var cart = await _cartService.GetCartAsync(userId);
+            if (cart == null)
+                return NotFound(); // 404 si l'utilisateur n'a pas de panier
+
             return Ok(_mapper.Map<CartDto>(cart));
         }
 
