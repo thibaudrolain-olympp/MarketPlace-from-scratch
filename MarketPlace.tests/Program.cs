@@ -1,8 +1,10 @@
 using Marketplace;
-using Marketplace.Automapper;
-using Marketplace.Controllers;
-using Marketplace.Repositories;
-using Marketplace.Services;
+using Marketplace.Application.Automapper;
+using Marketplace.Application.Services;
+using Marketplace.Application.ServicesInterfaces;
+using Marketplace.Domain.Interfaces;
+using Marketplace.Infrastructure.Repositories;
+using Marketplace.WebApi.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;

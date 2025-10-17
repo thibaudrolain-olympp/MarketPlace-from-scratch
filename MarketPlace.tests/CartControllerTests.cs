@@ -1,8 +1,9 @@
 using AutoMapper;
-using Marketplace.Controllers;
+using Marketplace.Application.Dto;
+using Marketplace.Application.ServiceModels;
+using Marketplace.Application.ServicesInterfaces;
 using Marketplace.Dto;
-using Marketplace.ServiceModels;
-using Marketplace.Services;
+using Marketplace.WebApi.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 

@@ -1,11 +1,11 @@
-﻿using Marketplace.Controllers;
-using Marketplace.Business.Interfaces;
-using Marketplace.Dto;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Marketplace.Application.Dto;
+using Marketplace.Application.ServicesInterfaces;
+using Marketplace.WebApi.Controllers;
 
 namespace Marketplace.Tests.Controllers
 {

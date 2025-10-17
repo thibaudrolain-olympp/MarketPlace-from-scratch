@@ -32,18 +32,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-    <Folder Include="Assets\" />
+    <Folder Include="Shared\" />
+    <Folder Include="Shared\Helpers\" />
+    <Folder Include="wwwroot\Assets\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Assets\Chaussure_1.jpg">
+    <None Include="wwwroot\Assets\Chaussure_1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\Chaussure_2.jpg">
+    <None Include="wwwroot\Assets\Chaussure_2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\Chaussure_3.jpg">
+    <None Include="wwwroot\Assets\Chaussure_3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
