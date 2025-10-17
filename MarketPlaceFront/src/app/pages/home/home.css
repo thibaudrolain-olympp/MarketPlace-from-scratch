@@ -1,0 +1,80 @@
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.hero {
+  background: url("https://source.unsplash.com/1600x600/?mountains,trail") center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 6rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.hero h1 {
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+}
+
+.hero p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.products {
+  padding: 3rem 2rem;
+  background: #fafafa;
+}
+
+.products h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+  background: #333;
+  color: #eee;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.price {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #388e3c;
+}

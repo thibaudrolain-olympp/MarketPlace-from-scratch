@@ -1,0 +1,19 @@
+<div *ngIf="!auth.isLoggedIn(); else loggedInBlock">
+  <h2>Login</h2>
+  <form (ngSubmit)="onLogin()">
+    <label>
+      Username:
+      <input [(ngModel)]="username" name="username" required>
+    </label>
+    <label>
+      Password:
+      <input [(ngModel)]="password" name="password" type="password" required>
+    </label>
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<ng-template #loggedInBlock>
+  <p>Bienvenue !</p>
+  <button (click)="onLogout()">Logout</button>
+</ng-template>

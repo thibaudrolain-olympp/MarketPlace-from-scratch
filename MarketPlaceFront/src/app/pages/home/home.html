@@ -1,0 +1,37 @@
+<mat-toolbar color="primary" class="toolbar">
+  <span class="logo">TrailMarket</span>
+  <span class="spacer"></span>
+  <button mat-button>Connexion</button>
+  <button mat-stroked-button color="accent">Créer un compte</button>
+</mat-toolbar>
+
+<div class="hero">
+  <div class="hero-content">
+    <h1>Équipez-vous pour vos aventures trail</h1>
+    <p>Découvrez du matériel de qualité sélectionné par des passionnés.</p>
+    <button mat-raised-button color="accent">Voir les produits</button>
+  </div>
+</div>
+
+<div class="products">
+  <h2>Nos sélections</h2>
+  <div class="product-grid">
+    <mat-card class="product-card" *ngFor="let item of products">
+     <img mat-card-image [src]="'data:image/png;base64,' + getMainImage(item)" [alt]="item.name">
+        
+      <mat-card-content>
+        <h3>{{item.name}}</h3>
+        <p>{{item.description}}</p>
+        <p class="price">{{item.price | currency:'EUR'}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">Détails</button>
+        <button mat-raised-button color="accent">Acheter</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2025 TrailMarket - Le marketplace des passionnés de trail</p>
+</footer>
