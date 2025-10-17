@@ -23,8 +23,10 @@ public class ProductServiceTests
     public async Task GetAllAsync_ReturnsMappedProducts()
     {
         var products = new List<Product> { new Product { Id = 1, Name = "Test" } };
-        var models = new List<ProductServiceModel> { new ProductServiceModel { Id = 1, Name = "Test" } };
-        _repoMock.Setup(r => r.GetAllAsync()).ReturnsAsync(products);
+        var models = new List<ProductServiceModel> {
+            new ProductServiceModel { Id = 1, Name = "Test", Images = new List<ProductImageServiceModel>() }
+        };
+        _repoMock.Setup(r => r.GetAllProduitsAsync()).ReturnsAsync(products);
         _mapperMock.Setup(m => m.Map<IList<ProductServiceModel>>(products)).Returns(models);
         var result = await _service.GetAllAsync();
         Assert.Single(result);
@@ -107,7 +109,8 @@ public class ProductServiceTests
     [Fact]
     public async Task GetAllAsync_ThrowsException_WhenRepositoryFails()
     {
-        _repoMock.Setup(r => r.GetAllAsync()).ThrowsAsync(new System.Exception("Repo error"));
+        // le service appelle GetAllProduitsAsync()
+        _repoMock.Setup(r => r.GetAllProduitsAsync()).ThrowsAsync(new System.Exception("Repo error"));
         await Assert.ThrowsAsync<System.Exception>(() => _service.GetAllAsync());
     }
 
@@ -143,7 +146,6 @@ public class ProductServiceTests
     {
         var model = new ProductServiceModel { Id = 1, Name = "Test" };
         _mapperMock.Setup(m => m.Map<Product>(model)).Returns((Product)null);
-        _repoMock.Setup(r => r.AddAsync((Product)null)).ReturnsAsync((Product)null);
         var result = await _service.CreateAsync(model);
         Assert.Null(result);
     }

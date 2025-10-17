@@ -36,7 +36,7 @@ namespace Marketplace.Tests
             var category = new CategoryServiceModel { Id = 1, Name = "Cat", ParentId = null, Products = new List<ProductServiceModel>() };
             var serviceModels = new List<ProductServiceModel>
             {
-                new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now)
+                new(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now, new List<ProductImageServiceModel>())
             };
             var dtoList = new List<ProductDto>
             {
@@ -119,7 +119,7 @@ namespace Marketplace.Tests
         {
             // Arrange
             var category = new CategoryServiceModel { Id = 1, Name = "Cat", ParentId = null, Products = new List<ProductServiceModel>() };
-            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now);
+            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now, new List<ProductImageServiceModel>());
             var dto = new ProductDto
             {
                 Id = 1,
@@ -159,7 +159,7 @@ namespace Marketplace.Tests
                 UpdatedAt = DateTime.Now
             };
             var category = new CategoryServiceModel { Id = 1, Name = "Cat", ParentId = null, Products = new List<ProductServiceModel>() };
-            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", dto.CreatedAt, dto.UpdatedAt);
+            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now, new List<ProductImageServiceModel>());
             _mapperMock.Setup(m => m.Map<ProductServiceModel>(dto)).Returns(serviceModel);
             _serviceMock.Setup(s => s.CreateAsync(serviceModel)).ReturnsAsync(serviceModel);
             _mapperMock.Setup(m => m.Map<ProductDto>(serviceModel)).Returns(dto);
@@ -200,7 +200,7 @@ namespace Marketplace.Tests
                 UpdatedAt = DateTime.Now
             };
             var category = new CategoryServiceModel { Id = 1, Name = "Cat", ParentId = null, Products = new List<ProductServiceModel>() };
-            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", dto.CreatedAt, dto.UpdatedAt);
+            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now, new List<ProductImageServiceModel>());
             _mapperMock.Setup(m => m.Map<ProductServiceModel>(dto)).Returns(serviceModel);
             _serviceMock.Setup(s => s.CreateAsync(serviceModel)).ThrowsAsync(new Exception("Erreur"));
 
@@ -240,7 +240,7 @@ namespace Marketplace.Tests
                 UpdatedAt = DateTime.Now
             };
             var category = new CategoryServiceModel { Id = 1, Name = "Cat", ParentId = null, Products = new List<ProductServiceModel>() };
-            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", dto.CreatedAt, dto.UpdatedAt);
+            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now, new List<ProductImageServiceModel>());
             _mapperMock.Setup(m => m.Map<ProductServiceModel>(dto)).Returns(serviceModel);
             _serviceMock.Setup(s => s.UpdateAsync(1, serviceModel)).ReturnsAsync((ProductServiceModel?)null);
 
@@ -268,7 +268,7 @@ namespace Marketplace.Tests
                 UpdatedAt = DateTime.Now
             };
             var category = new CategoryServiceModel { Id = 1, Name = "Cat", ParentId = null, Products = new List<ProductServiceModel>() };
-            var serviceModel = new ProductServiceModel(1, "Updated", "UpdatedDesc", 20.0m, 2, category, "Inactive", dto.CreatedAt, dto.UpdatedAt);
+            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now, new List<ProductImageServiceModel>());
             _mapperMock.Setup(m => m.Map<ProductServiceModel>(dto)).Returns(serviceModel);
             _serviceMock.Setup(s => s.UpdateAsync(1, serviceModel)).ReturnsAsync(serviceModel);
             _mapperMock.Setup(m => m.Map<ProductDto>(serviceModel)).Returns(dto);
@@ -298,7 +298,7 @@ namespace Marketplace.Tests
                 UpdatedAt = DateTime.Now
             };
             var category = new CategoryServiceModel { Id = 1, Name = "Cat", ParentId = null, Products = new List<ProductServiceModel>() };
-            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", dto.CreatedAt, dto.UpdatedAt);
+            var serviceModel = new ProductServiceModel(1, "Test", "Desc", 10.0m, 1, category, "Active", DateTime.Now, DateTime.Now, new List<ProductImageServiceModel>());
             _mapperMock.Setup(m => m.Map<ProductServiceModel>(dto)).Returns(serviceModel);
             _serviceMock.Setup(s => s.UpdateAsync(1, serviceModel)).ThrowsAsync(new Exception("Erreur"));
 
