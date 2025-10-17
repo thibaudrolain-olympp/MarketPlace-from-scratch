@@ -18,7 +18,6 @@ namespace Marketplace.DataModels
 
         public int Quantity { get; set; }
 
-        public int CategoryId { get; set; }
         public Category Category { get; set; }
 
         public string Status { get; set; } // active, sold_out, inactive
@@ -26,8 +25,8 @@ namespace Marketplace.DataModels
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        public ICollection<ProductImage> Images { get; set; }
+        public List<ProductImage> Images { get; set; }
 
+        public List<CartItem> Items { get; set; }
     }
-
 }
