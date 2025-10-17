@@ -1,6 +1,4 @@
-﻿using Marketplace.Dto;
-
-namespace Marketplace.Application.ServiceModels
+﻿namespace Marketplace.Application.ServiceModels
 {
     public class CategoryServiceModel
     {

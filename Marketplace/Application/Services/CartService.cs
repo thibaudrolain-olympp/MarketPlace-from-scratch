@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Marketplace.Domain.DataModels;
-using Marketplace.Application.ServicesInterfaces;
-using Marketplace.Domain.Interfaces;
 using Marketplace.Application.ServiceModels;
+using Marketplace.Application.ServicesInterfaces;
+using Marketplace.Domain.DataModels;
+using Marketplace.Domain.Interfaces;
 
 namespace Marketplace.Application.Services
 {

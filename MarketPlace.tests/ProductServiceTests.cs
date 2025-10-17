@@ -1,12 +1,9 @@
-using Xunit;
-using Moq;
 using AutoMapper;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+using Marketplace.Application.ServiceModels;
 using Marketplace.Application.Services;
 using Marketplace.Domain.DataModels;
 using Marketplace.Domain.Interfaces;
-using Marketplace.Application.ServiceModels;
+using Moq;
 
 public class ProductServiceTests
 {

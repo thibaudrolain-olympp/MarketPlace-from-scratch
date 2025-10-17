@@ -3,7 +3,6 @@ using Marketplace.Application.ServiceModels;
 using Marketplace.Application.ServicesInterfaces;
 using Marketplace.Domain.DataModels;
 using Marketplace.Domain.Interfaces;
-using Org.BouncyCastle.Utilities;
 
 namespace Marketplace.Application.Services
 {
@@ -40,9 +39,7 @@ namespace Marketplace.Application.Services
                     byte[] tableau = File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/" + image.ImageUrl);
                     image.Image = Convert.ToBase64String(tableau);
                 }
-
             }
-            
 
             return mapper;
         }

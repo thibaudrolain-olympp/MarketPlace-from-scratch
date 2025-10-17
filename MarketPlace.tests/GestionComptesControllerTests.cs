@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Marketplace.Application.Dto;
+﻿using Marketplace.Application.Dto;
 using Marketplace.Application.ServicesInterfaces;
 using Marketplace.WebApi.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Moq;
 
 namespace Marketplace.Tests.Controllers
 {
@@ -21,7 +20,6 @@ namespace Marketplace.Tests.Controllers
 
             _controller.ControllerContext = new ControllerContext
             {
-               
                 HttpContext = new DefaultHttpContext()
             };
             _controller.ControllerContext.HttpContext.Request.Scheme = "http";

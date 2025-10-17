@@ -5,12 +5,12 @@ using Marketplace.Domain.DataModels;
 
 namespace Marketplace.Application.Automapper
 {
-    public class ProductProfile : Profile
+    public class CategoryProfile : Profile
     {
-        public ProductProfile()
+        public CategoryProfile()
         {
-            CreateMap<ProductServiceModel, ProductDto>().ReverseMap();
-            CreateMap<Product, ProductServiceModel>().ReverseMap();
+            CreateMap<CategoryServiceModel, CategoryDto>().ReverseMap();
+            CreateMap<Category, CategoryServiceModel>().ReverseMap();
         }
     }
 }

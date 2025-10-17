@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using MailKit.Security;
-using MimeKit;
-using Microsoft.Extensions.Configuration;
+﻿using MailKit.Security;
 using Marketplace.Application.ServicesInterfaces;
+using MimeKit;
 
 namespace Marketplace.Infrastructure.Services
 {
@@ -21,7 +18,7 @@ namespace Marketplace.Infrastructure.Services
             if (!MailboxAddress.TryParse(to, out var mailbox))
                 throw new FormatException("The 'to' email address is not a valid mailbox address.");
 
-            using var client = new MailKit.Net.Smtp.SmtpClient();       
+            using var client = new MailKit.Net.Smtp.SmtpClient();
             await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
             await client.AuthenticateAsync(user, password);
 

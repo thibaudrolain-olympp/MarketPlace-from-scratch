@@ -1,8 +1,6 @@
-using Xunit;
-using Moq;
-using Marketplace.Services;
+using Marketplace.Infrastructure.Services;
 using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
+using Moq;
 
 public class EmailSenderServiceTests
 {

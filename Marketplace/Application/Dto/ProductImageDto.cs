@@ -1,6 +1,4 @@
-﻿using Marketplace.DataModels;
-
-namespace Marketplace.Application.Dto
+﻿namespace Marketplace.Application.Dto
 {
     public class ProductImageDto
     {

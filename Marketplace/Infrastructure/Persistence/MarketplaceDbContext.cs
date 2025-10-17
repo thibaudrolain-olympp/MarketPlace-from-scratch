@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Identity.Client;
 
 namespace Marketplace
 {
@@ -12,8 +11,6 @@ namespace Marketplace
         public MarketplaceDbContext(DbContextOptions<MarketplaceDbContext> options) : base(options)
         {
         }
-
-
 
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<ProductImage> ProductImages => Set<ProductImage>();
@@ -44,7 +41,6 @@ namespace Marketplace
                 entity.Property(o => o.Id).UseIdentityColumn();
                 entity.HasOne(o => o.Category).WithMany(p => p.Products);
                 entity.HasMany(o => o.Images).WithOne(p => p.Product);
-
             });
 
             modelBuilder.Entity<CartItem>(entity =>
@@ -52,7 +48,6 @@ namespace Marketplace
                 entity.HasKey(o => o.Id);
                 entity.Property(o => o.Id).UseIdentityColumn();
                 entity.HasOne(o => o.Product).WithMany(c => c.Items);
-               
             });
 
             modelBuilder.Entity<Cart>(entity =>
@@ -72,7 +67,6 @@ namespace Marketplace
                         Database.Migrate();
                         SaveChanges();*/
 
-
             var ListCategory = new List<Category>
             {
                 new Category { Id = 1, Name = "Chaussures" },
@@ -87,7 +81,6 @@ namespace Marketplace
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().HasData(ListCategory);
-
 
             modelBuilder.Entity<Product>().HasData(
                      new
@@ -228,8 +221,7 @@ namespace Marketplace
             optionsBuilder.ConfigureWarnings(warnings =>
             {
                 warnings.Ignore(RelationalEventId.PendingModelChangesWarning);
-/*                warnings.Ignore(CoreEventId.AccidentalEntityType);*/
-
+                /*                warnings.Ignore(CoreEventId.AccidentalEntityType);*/
             }
 
                    );

@@ -118,7 +118,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAngular");
 
-
 // Redirection HTTPS
 app.UseHttpsRedirection();
 

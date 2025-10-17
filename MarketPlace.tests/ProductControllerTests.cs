@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using global::Marketplace.Controllers;
-using global::Marketplace.Services;
 using Marketplace.Application.Dto;
 using Marketplace.Application.ServiceModels;
 using Marketplace.Application.ServicesInterfaces;
