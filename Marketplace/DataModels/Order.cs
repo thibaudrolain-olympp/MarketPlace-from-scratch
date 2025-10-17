@@ -5,7 +5,6 @@
         public int Id { get; set; }
 
         public int BuyerId { get; set; }
-        public User Buyer { get; set; }
 
         public decimal TotalPrice { get; set; }
 
@@ -13,7 +12,5 @@
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
     }
-
 }
