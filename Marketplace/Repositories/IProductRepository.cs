@@ -5,5 +5,6 @@ namespace Marketplace.Repositories
     public interface IProductRepository : IGenericRepository<Product>
     {
         //Spécifique au produit
+        Task<IList<Product>> GetAllProduitsAsync();
     }
 }

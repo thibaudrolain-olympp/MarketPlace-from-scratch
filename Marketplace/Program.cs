@@ -52,6 +52,17 @@ builder.Services.ServiceDescriptors();
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<ProductProfile>());
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<CartProfile>());
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // ton front
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 // Construction de l'application
 var app = builder.Build();
 
@@ -103,6 +114,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAngular");
+
 
 // Redirection HTTPS
 app.UseHttpsRedirection();

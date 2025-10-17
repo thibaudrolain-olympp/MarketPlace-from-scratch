@@ -1,4 +1,5 @@
 ﻿using Marketplace.DataModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Marketplace.Repositories
 {
@@ -13,5 +14,7 @@ namespace Marketplace.Repositories
         /// </summary>
         /// <param name="db">Contexte de base de données Marketplace</param>
         public ProductRepository(MarketplaceDbContext db) : base(db) { }
+
+        public async Task<IList<Product>> GetAllProduitsAsync() => await _dbSet.AsNoTracking().Include(c => c.Images).ToListAsync();
     }
 }

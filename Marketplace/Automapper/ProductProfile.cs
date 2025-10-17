@@ -11,6 +11,14 @@ namespace Marketplace.Automapper
         {
             CreateMap<ProductServiceModel, ProductDto>().ReverseMap();
             CreateMap<Product, ProductServiceModel>().ReverseMap();
+
+            CreateMap<CategoryServiceModel, CategoryDto>().ReverseMap();
+            CreateMap<Category, CategoryServiceModel>().ReverseMap();
+
+            CreateMap<ProductImageServiceModel, ProductImageDto>().ReverseMap();
+            CreateMap<ProductImage, ProductImageServiceModel>().ReverseMap();
+
+
         }
     }
 }

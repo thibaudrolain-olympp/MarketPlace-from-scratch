@@ -12,10 +12,12 @@
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
+        public List<ProductImageServiceModel> Images { get; set; }
+
         public ProductServiceModel()
         { }
 
-        public ProductServiceModel(int id, string name, string description, decimal price, int quantity, CategoryServiceModel category, string status, DateTime createdAt, DateTime updatedAt)
+        public ProductServiceModel(int id, string name, string description, decimal price, int quantity, CategoryServiceModel category, string status, DateTime createdAt, DateTime updatedAt, List<ProductImageServiceModel> productImages)
         {
             Id = id;
             Name = name;
@@ -26,6 +28,7 @@
             Status = status;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            Images = productImages;
         }
     }
 }

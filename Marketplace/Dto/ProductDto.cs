@@ -14,6 +14,8 @@ namespace Marketplace.Dto
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
+        public List<ProductImageDto> Images { get; set; }
+
         public ProductDto()
         { }
     }

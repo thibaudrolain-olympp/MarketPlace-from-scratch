@@ -13,17 +13,66 @@ namespace Marketplace
         {
         }
 
-        public DbSet<Cart> Carts => Set<Cart>();
-        public DbSet<CartItem> CartItems => Set<CartItem>();
+
+
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<ProductImage> ProductImages => Set<ProductImage>();
-        public DbSet<Order> Orders => Set<Order>();
+
         public DbSet<Product> Products => Set<Product>();
 
+        public DbSet<CartItem> CartItems => Set<CartItem>();
 
+        public DbSet<Cart> Carts => Set<Cart>();
+        public DbSet<Order> Orders => Set<Order>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+                entity.Property(o => o.Id).UseIdentityColumn();
+            });
+
+            modelBuilder.Entity<ProductImage>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+                entity.Property(o => o.Id).UseIdentityColumn();
+            });
+            modelBuilder.Entity<Product>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+                entity.Property(o => o.Id).UseIdentityColumn();
+                entity.HasOne(o => o.Category).WithMany(p => p.Products);
+                entity.HasMany(o => o.Images).WithOne(p => p.Product);
+
+            });
+
+            modelBuilder.Entity<CartItem>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+                entity.Property(o => o.Id).UseIdentityColumn();
+                entity.HasOne(o => o.Product).WithMany(c => c.Items);
+               
+            });
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+                entity.Property(o => o.Id).UseIdentityColumn();
+                entity.HasMany(o => o.Items).WithOne(c => c.Cart);
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.HasKey(o => o.Id);
+                entity.Property(o => o.Id).UseIdentityColumn();
+            });
+
+            /*            Database.EnsureDeleted();
+                        Database.Migrate();
+                        SaveChanges();*/
+
+
             var ListCategory = new List<Category>
             {
                 new Category { Id = 1, Name = "Chaussures" },
@@ -166,7 +215,7 @@ namespace Marketplace
                          Description = "Frontale haute performance pour trail nocturne.",
                          Price = 159.90m,
                          Quantity = 25,
-                         CategoryId = 9,
+                         CategoryId = 3,
                          Status = "active",
                          CreatedAt = DateTime.UtcNow,
                          UpdatedAt = DateTime.UtcNow
@@ -174,10 +223,16 @@ namespace Marketplace
                  );
         }
 
-protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.ConfigureWarnings(warnings =>
-                   warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+            {
+                warnings.Ignore(RelationalEventId.PendingModelChangesWarning);
+/*                warnings.Ignore(CoreEventId.AccidentalEntityType);*/
+
+            }
+
+                   );
         }
     }
 }

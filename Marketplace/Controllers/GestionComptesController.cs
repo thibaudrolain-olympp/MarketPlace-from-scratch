@@ -13,7 +13,6 @@ using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegiste
 namespace Marketplace.Controllers
 {
     [ApiController]
-    /*    [Authorize]*/
     [Route("api/[controller]")]
     public class GestionComptesController(
         Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager,
@@ -80,6 +79,7 @@ namespace Marketplace.Controllers
             return Ok("Email confirmed successfully!");
         }
 
+        /*    [Authorize]*/
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {

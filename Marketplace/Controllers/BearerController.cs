@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Marketplace.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Marketplace.Controllers
 {
@@ -6,10 +7,10 @@ namespace Marketplace.Controllers
     [Route("[controller]")]
     public class BearerController(IConfiguration configuration) : ControllerBase
     {
-        [HttpPost(Name = "GetToken")]
-        public ActionResult GetToken([FromBody] string key)
+        [HttpPost(Name = "Token")]
+        public ActionResult GetToken([FromBody] BearerRequestDto request)
         {
-            if (string.IsNullOrEmpty(key) || key != configuration.GetSection("JwtSettings")["Key"])
+            if (string.IsNullOrEmpty(request.Key) || request.Key != configuration.GetSection("JwtSettings")["Key"])
             {
                 return new UnauthorizedResult();
             }

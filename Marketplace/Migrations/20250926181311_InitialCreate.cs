@@ -214,11 +214,10 @@ namespace Marketplace.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Category = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -227,7 +226,8 @@ namespace Marketplace.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,6 +292,23 @@ namespace Marketplace.Migrations
                     { 6, "High-tech", null },
                     { 7, "Matériel trail", null },
                     { 8, "Nutrition", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "CreatedAt", "Description", "Name", "Price", "Quantity", "SellerProfileId", "Status", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(732), "Chaussures trail pour terrains techniques et boueux.", "Chaussures de Trail Salomon Speedcross 5", 129.90m, 50, 1, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(736) },
+                    { 2, 1, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2507), "Chaussures rapides pour triathlons et transitions rapides.", "Chaussures de Triathlon Asics Noosa Tri 15", 139.00m, 40, 1, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2507) },
+                    { 3, 2, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2509), "Sac léger pour trail avec réservoir 1.5L.", "Sac d’hydratation Camelbak Ultra Pro Vest 7L", 119.99m, 25, 2, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2510) },
+                    { 4, 3, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2511), "Ceinture légère et élastique pour dossard et gels.", "Ceinture porte-dossard triathlon Compressport", 19.90m, 100, 3, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2512) },
+                    { 5, 4, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2513), "Néoprène pour natation en eau libre.", "Combinaison néoprène Orca Athlex Flow", 289.00m, 15, 2, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2514) },
+                    { 6, 5, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2516), "Vélo performance route pour triathlons et compétitions.", "Vélo de route carbone Canyon Aeroad CF SLX", 3999.00m, 5, 4, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2516) },
+                    { 7, 6, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2518), "Montre GPS multisport avec suivi performance trail/triathlon.", "Montre GPS Garmin Forerunner 965", 599.00m, 20, 1, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2519) },
+                    { 8, 7, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2521), "Bâtons pliables ultralégers pour longues distances.", "Bâtons de trail Black Diamond Distance Carbon Z", 159.00m, 30, 3, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2521) },
+                    { 9, 8, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2522), "Pack de gels énergétiques pour endurance.", "Pack gels énergétiques GU Energy (24x40g)", 38.00m, 200, 2, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2523) },
+                    { 10, 3, new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2525), "Frontale haute performance pour trail nocturne.", "Lampe frontale Petzl Nao RL 1500 lumens", 159.90m, 25, 1, "active", new DateTime(2025, 9, 26, 18, 13, 9, 447, DateTimeKind.Utc).AddTicks(2525) }
                 });
 
             migrationBuilder.CreateIndex(

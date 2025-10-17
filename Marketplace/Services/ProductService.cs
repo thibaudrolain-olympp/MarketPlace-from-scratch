@@ -2,6 +2,7 @@
 using Marketplace.DataModels;
 using Marketplace.Repositories;
 using Marketplace.ServiceModels;
+using Org.BouncyCastle.Utilities;
 
 namespace Marketplace.Services
 {
@@ -28,8 +29,21 @@ namespace Marketplace.Services
 
         public async Task<IList<ProductServiceModel>> GetAllAsync()
         {
-            var entities = await _repository.GetAllAsync();
-            return _mapper.Map<IList<ProductServiceModel>>(entities);
+            var entities = await _repository.GetAllProduitsAsync();
+            var mapper = _mapper.Map<IList<ProductServiceModel>>(entities);
+
+            foreach (var product in mapper)
+            {
+                foreach (var image in product.Images)
+                {
+                    byte[] tableau = File.ReadAllBytes(Directory.GetCurrentDirectory() + "/Assets/" + image.ImageUrl);
+                    image.Image = Convert.ToBase64String(tableau);
+                }
+
+            }
+            
+
+            return mapper;
         }
 
         public async Task<ProductServiceModel?> GetByIdAsync(int id)
